@@ -1,79 +1,102 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>相册</title>
-    <style type="text/css">
-    
-        *{padding: 0;
-        margin: 0;}
-        body,html{height:100%;}
-        body{background-color: black;}
-        #box{width: 280px;
-            height: 400px;
-            position: fixed;
-            left: 0;
-            right: 0;
-            top:0;
-            bottom: 0;
-            margin: auto;
-            transform-style: preserve-3d;
-            transform: rotateX(0deg) rotateY(0deg);
-            animation: go 45s linear infinite;
-           }
-        #box img{width: 280px;
-                 height: 400px;
-                 position: absolute;
-                 left: 0;
-                 top: 0;
-        }
-        #box img:nth-child(1){
-            transform: rotateY(0deg) translateZ(650px);}
-        #box img:nth-child(2){
-            transform: rotateY(36deg) translateZ(650px);}
-        #box img:nth-child(3){
-            transform: rotateY(72deg) translateZ(650px);}
-        #box img:nth-child(4){
-            transform: rotateY(108deg) translateZ(650px);}
-        #box img:nth-child(5){
-            transform: rotateY(144deg) translateZ(650px);}
-        #box img:nth-child(6){
-            transform: rotateY(180deg) translateZ(650px);}
-        #box img:nth-child(7){
-            transform: rotateY(216deg) translateZ(650px);}
-        #box img:nth-child(8){
-            transform: rotateY(252deg) translateZ(650px);}
-        #box img:nth-child(9){
-            transform: rotateY(288deg) translateZ(650px);}
-        #box img:nth-child(10){
-            transform: rotateY(324deg) translateZ(650px);}
-		@keyframes go {
-		    0%{transform: rotateX(0deg) rotateY(0deg);}
-		    25%{transform: rotateX(20deg) rotateY(180deg);}
-		    50%{transform: rotateX(0deg) rotateY(360deg);}
-		    75%{transform: rotateX(-20deg) rotateY(540deg);}
-		    100%{transform: rotateX(0deg) rotateY(720deg);}
-		
-		}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>相册</title>
+  <style type="text/css">
+    * { padding: 0; margin: 0; box-sizing: border-box; }
+    html, body { height: 100%; background-color: black; }
+
+    #box {
+      width: 280px;
+      height: 400px;
+      position: fixed;
+      left: 0; right: 0; top: 0; bottom: 0;
+      margin: auto;
+      transform-style: preserve-3d;
+      animation: go 45s linear infinite;
+    }
+
+    #box img {
+      width: 280px;
+      height: 400px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    #box img:nth-child(1) { transform: rotateY(0deg) translateZ(650px); }
+    #box img:nth-child(2) { transform: rotateY(36deg) translateZ(650px); }
+    #box img:nth-child(3) { transform: rotateY(72deg) translateZ(650px); }
+    #box img:nth-child(4) { transform: rotateY(108deg) translateZ(650px); }
+    #box img:nth-child(5) { transform: rotateY(144deg) translateZ(650px); }
+    #box img:nth-child(6) { transform: rotateY(180deg) translateZ(650px); }
+    #box img:nth-child(7) { transform: rotateY(216deg) translateZ(650px); }
+    #box img:nth-child(8) { transform: rotateY(252deg) translateZ(650px); }
+    #box img:nth-child(9) { transform: rotateY(288deg) translateZ(650px); }
+    #box img:nth-child(10) { transform: rotateY(324deg) translateZ(650px); }
+
+    @keyframes go {
+      0%   { transform: rotateX(0deg) rotateY(0deg); }
+      25%  { transform: rotateX(20deg) rotateY(180deg); }
+      50%  { transform: rotateX(0deg) rotateY(360deg); }
+      75%  { transform: rotateX(-20deg) rotateY(540deg); }
+      100% { transform: rotateX(0deg) rotateY(720deg); }
+    }
+
+    #start-btn {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
-<audio autoplay="autopaly">
-  <source src="picture/yy.mp3" type="audio/mp3" />
-</audio>
+<body>
+  <audio id="bgm" src="picture/yy.mp3" loop></audio>
 
-	<body>
-		<div id="box">
-		    <img src="picture/1.jpg">
-		    <img src="picture/2.jpg">
-		    <img src="picture/3.jpg">
-		    <img src="picture/4.jpg">
-		    <img src="picture/5.jpg">
-		    <img src="picture/6.jpg">
-		    <img src="picture/7.jpg">
-		    <img src="picture/8.jpg">
-		    <img src="picture/9.jpg">
-		    <img src="picture/10.jpg">
-		</div>
-	</body>
+  <button id="start-btn">🎵 点击开启音乐</button>
+
+  <div id="box">
+    <img src="picture/1.jpg">
+    <img src="picture/2.jpg">
+    <img src="picture/3.jpg">
+    <img src="picture/4.jpg">
+    <img src="picture/5.jpg">
+    <img src="picture/6.jpg">
+    <img src="picture/7.jpg">
+    <img src="picture/8.jpg">
+    <img src="picture/9.jpg">
+    <img src="picture/10.jpg">
+  </div>
+
+  <script>
+    const audio = document.getElementById('bgm');
+    const button = document.getElementById('start-btn');
+
+    const playMusic = () => {
+      audio.play().then(() => {
+        button.style.display = 'none';
+      }).catch(err => {
+        console.log("播放失败：", err);
+      });
+    };
+
+    button.addEventListener('click', playMusic);
+
+    // 兼容 iOS：监听首次触摸自动触发播放
+    document.addEventListener('touchstart', function () {
+      playMusic();
+    }, { once: true });
+  </script>
+</body>
 </html>
